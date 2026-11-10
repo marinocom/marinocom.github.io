@@ -14,7 +14,7 @@
   (function () {
     var t = null, l = null;
     try { t = localStorage.getItem('mob-theme'); l = localStorage.getItem('mob-lang'); } catch (e) {}
-    if (t !== 'dark') t = 'light';
+    if (t !== 'dark' && t !== 'light') t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
     var pal = (location.hash.match(/^#palette-(indigo|manuscript|matcha|electric)$/) || [])[1];
     if (pal) document.documentElement.setAttribute('data-palette', pal);
@@ -706,6 +706,17 @@
       sp.textContent = lang === 'ja' ? sp.getAttribute('data-ja-t') : sp.getAttribute('data-t');
     });
   }
+  // follow the system setting live, until the visitor picks a theme by hand
+  try {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onSys = function (e) {
+      var saved = null; try { saved = localStorage.getItem('mob-theme'); } catch (err) {}
+      if (saved === 'dark' || saved === 'light') return;
+      root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      paintThemeBtn();
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onSys); else if (mq.addListener) mq.addListener(onSys);
+  } catch (err) {}
   themeBtn.addEventListener('click', function () {
     var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
