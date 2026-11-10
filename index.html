@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-palette="indigo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marino Oliveros Blanco</title>
+<meta name="description" content="Marino Oliveros Blanco: AI graduate (UAB), historical cipher decryption research at the Computer Vision Center, builder of small browser tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 16Q16 3 29 16Q16 27 3 16Z' fill='%23fffdf7' stroke='%231f1b16' stroke-width='2'/%3E%3Ccircle cx='16' cy='15.5' r='5.5' fill='%23ffa500'/%3E%3Ccircle cx='16' cy='15.5' r='2.4' fill='%231f1b16'/%3E%3C/svg%3E">
+<script>
+  (function () {
+    var t = null, l = null;
+    try { t = localStorage.getItem('mob-theme'); l = localStorage.getItem('mob-lang'); } catch (e) {}
+    if (t !== 'dark') t = 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    var pal = (location.hash.match(/^#palette-(indigo|manuscript|matcha|electric)$/) || [])[1];
+    if (pal) document.documentElement.setAttribute('data-palette', pal);
+    if (l === 'ja') document.documentElement.setAttribute('lang', 'ja');
+  })();
+</script>
+<style>
+  :root {
+    --bg: #f7f3ea;
+    --text: #1f1b16;
+    --text-2: #675f54;
+    --text-3: #978e80;
+    --border: #ddd4c4;
+    --border-light: #c8bdab;
+    --surface: #efe7d8;
+    --surface-alt: #e9e0cf;
+    --surface-hover: #e2d8c5;
+    --c1: #b45f00;
+    --c2: #8c6c0c;
+    --c3: #4b780b;
+    --sclera: #fffdf8;
+    --ink: #1f1b16;
+    --pupil: #14110d;
+    --overlay: rgba(31, 27, 22, 0.4);
+  }
+  [data-theme="dark"] {
+    --bg: #15120e;
+    --text: #ece5d8;
+    --text-2: #aaa193;
+    --text-3: #7c7468;
+    --border: #35302a;
+    --border-light: #4a433a;
+    --surface: #201c17;
+    --surface-alt: #29241d;
+    --surface-hover: #353028;
+    --c1: #ffa500;
+    --c2: #e3c04f;
+    --c3: #9acd32;
+    --sclera: #ece4d4;
+    --ink: #ece5d8;
+    --pupil: #0d0b08;
+    --overlay: rgba(0, 0, 0, 0.6);
+  }
+
+
+  /* ---------- palettes ---------- */
+  /* ai-zome: Kyoto indigo, torii vermilion, moss */
+  [data-palette="indigo"] { --bg: #f5f3ee; --surface: #ebe8e0; --surface-alt: #e6e2d8; --surface-hover: #ddd8cc; --border: #d9d4c8; --border-light: #c4bfb2; --c1: #29468a; --c2: #b03a2e; --c3: #4f6d36; }
+  [data-palette="indigo"][data-theme="dark"] { --bg: #111318; --surface: #1b1e25; --surface-alt: #222630; --surface-hover: #2c313c; --border: #2d323d; --border-light: #414856; --c1: #93abef; --c2: #f0806f; --c3: #a3c584; }
+  /* manuscript: iron-gall ink, oxblood seal, brass */
+  [data-palette="manuscript"] { --bg: #f6f1e6; --surface: #ece4d3; --surface-alt: #e7decb; --surface-hover: #ddd2bc; --border: #dbd1bd; --border-light: #c6baa2; --c1: #7d2230; --c2: #26395a; --c3: #7a6224; }
+  [data-palette="manuscript"][data-theme="dark"] { --bg: #14110e; --surface: #1f1b16; --surface-alt: #28231c; --surface-hover: #332d24; --border: #352f27; --border-light: #4a4238; --c1: #e57d8c; --c2: #9fb6de; --c3: #d9bb6c; }
+  /* matcha: tea green, olive, deep teal */
+  [data-palette="matcha"] { --bg: #f3f4ec; --surface: #e7eadb; --surface-alt: #e1e5d3; --surface-hover: #d6dbc5; --border: #d4d9c6; --border-light: #bcc3aa; --c1: #3c6a33; --c2: #6f7d1d; --c3: #275c63; }
+  [data-palette="matcha"][data-theme="dark"] { --bg: #101410; --surface: #1a1f19; --surface-alt: #212820; --surface-hover: #2b332a; --border: #2c342b; --border-light: #414c3f; --c1: #8fd07f; --c2: #cbd66b; --c3: #7cc6cc; }
+  /* electric: cobalt, magenta, teal on cool paper */
+  [data-palette="electric"] { --bg: #f4f6f8; --surface: #e9edf2; --surface-alt: #e3e8ee; --surface-hover: #d9dfe7; --border: #d7dde5; --border-light: #bfc7d2; --text: #1d2126; --text-2: #5d646d; --text-3: #8e959e; --c1: #2c3aff; --c2: #c81f68; --c3: #0b7f62; }
+  [data-palette="electric"][data-theme="dark"] { --bg: #14161a; --surface: #1d2025; --surface-alt: #24282e; --surface-hover: #2f343b; --border: #2f343b; --border-light: #444a53; --text: #e8eaed; --text-2: #a7adb5; --text-3: #7a818a; --c1: #8f98ff; --c2: #ff73a8; --c3: #4fd6b0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: none; }
+  ::-webkit-scrollbar { display: none; }
+  html { font-size: 16px; scroll-behavior: smooth; font-synthesis: none; }
+  body {
+    font-family: "Courier Prime", "Courier New", Courier, "Noto Sans JP", monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background-color .3s, color .3s;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--c1); color: var(--bg); }
+  a { color: inherit; }
+  :focus-visible { outline: 2px dotted var(--c1); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- fixed controls ---------- */
+  .top-controls { position: fixed; top: 1rem; right: 1.25rem; z-index: 1000; display: flex; gap: 8px; }
+  .lang-toggle, .theme-toggle {
+    background: var(--bg); border: 1px solid currentColor; color: var(--text);
+    padding: .4rem .7rem; border-radius: .4rem; cursor: pointer;
+    font-family: inherit; font-size: .85rem; opacity: .7; transition: opacity .2s, color .3s;
+  }
+  .lang-toggle:hover { opacity: 1; }
+  .lang-toggle .on, .theme-toggle .on { font-weight: 700; opacity: 1; }
+  .lang-toggle span, .theme-toggle span { opacity: .6; }
+  .lang-toggle span.on, .theme-toggle span.on { opacity: 1; }
+
+  /* ---------- layout ---------- */
+  .container { position: relative; max-width: 1100px; margin: 0 auto; padding: 40px; min-height: 100vh; }
+  .main-content { display: flex; align-items: stretch; }
+  .left-content {
+    width: 216px; flex: 0 0 216px; display: flex; flex-direction: column; padding-left: 8px;
+    position: sticky; top: 40px; align-self: flex-start; height: calc(100vh - 80px);
+  }
+  .separator {
+    position: absolute; left: 300px; top: 0; bottom: 0; width: 1px;
+    border-left: 1px dotted var(--border-light); transition: border-color .3s;
+  }
+  .right-content { flex: 1; padding-left: 130px; display: flex; flex-direction: column; min-width: 0; }
+
+  /* ---------- the eye ---------- */
+  .eye-wrap {
+    --eyew: 15rem;
+    width: var(--eyew); margin-left: -4px; margin-bottom: 14px; padding: 14px 0 10px;
+    cursor: pointer; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none;
+    transition: --eyew .3s;
+  }
+  #eye {
+    font-family: "Courier Prime", "Courier New", Courier, monospace;
+    font-size: calc(var(--eyew) / 22.8); line-height: 1.08; letter-spacing: 0;
+    color: var(--text); white-space: pre; margin: 0; font-weight: 700;
+    transition: font-size .3s cubic-bezier(.34,1.56,.64,1), color .3s;
+  }
+  .scrolled .eye-wrap { --eyew: 13rem; }
+  #eye .a-lash { color: var(--text-2); font-weight: 400; }
+  #eye .a-iris { color: var(--c1); }
+  #eye .a-iris2 { color: var(--c1); }
+  #eye .a-limbal { color: var(--c2); }
+  #eye .a-pupil { color: var(--text); }
+  #eye .a-glint { color: var(--text-3); }
+
+  .eye-hint {
+    font-size: .72rem; color: var(--text-3); margin: -6px 0 16px 2px; min-height: 1em;
+    transition: color .3s, opacity .3s;
+  }
+
+  .name { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; line-height: 1.25; }
+  .title { font-size: .9rem; line-height: 1.5; color: var(--text); }
+  .where { font-size: .8rem; color: var(--text-3); margin-top: 10px; }
+
+  .sidebar-nav { display: flex; flex-direction: column; gap: 12px; margin-top: 40px; margin-bottom: 24px; }
+  .sidebar-nav-link {
+    font-size: 1rem; font-weight: 500; color: var(--text-2); text-decoration: none; display: inline-block;
+    transition: color .2s, font-weight .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .sidebar-nav-link::before { content: "• "; color: var(--border-light); transition: color .2s; }
+  .sidebar-nav-link::after, .arrow-after::after {
+    content: " ->"; font-variant-ligatures: none; font-weight: 400; color: inherit;
+    letter-spacing: -7.2px; padding: 0 4px;
+    transition: letter-spacing .3s cubic-bezier(.34,1.56,.64,1), color .2s;
+  }
+  .sidebar-nav-link:hover, .sidebar-nav-link.active { color: var(--text); font-weight: 700; }
+  .sidebar-nav-link.active::before { color: var(--c1); }
+  .sidebar-nav-link:hover::after { letter-spacing: .15em; }
+
+  .sidebar-bottom { margin-top: auto; font-size: .75rem; color: var(--text-3); line-height: 1.6; }
+  .sidebar-bottom a { color: var(--text-3); text-decoration: none; }
+  .sidebar-bottom a:hover { color: var(--text); }
+
+  /* ---------- hero ---------- */
+  .hello {
+    font-size: 4rem; font-weight: 700; margin: 2.8rem 0 24px;
+    font-family: "Courier Prime", "Courier New", Courier, "Noto Sans JP", monospace;
+    font-style: italic;
+    min-height: 1.2em; white-space: nowrap;
+  }
+  html[lang="ja"] .hello { font-style: normal; font-size: 3.2rem; }
+  .hello .cg { color: var(--c1); font-style: normal; font-weight: 400; transition: color .25s; }
+  .hello .cg.flick { color: var(--c2); }
+  .hello .pl { color: var(--text); transition: color .25s; }
+  .intro { font-size: 1.4rem; line-height: 1.5; margin: -12px 0 54px; max-width: 520px; }
+  .intro b { font-weight: 700; }
+  .hl-1 { color: var(--c1); font-weight: 700; }
+  .hl-2 { color: var(--c2); font-weight: 700; }
+  .hl-3 { color: var(--c3); font-weight: 700; }
+
+  /* ---------- sections ---------- */
+  .sections { display: flex; flex-direction: column; gap: 64px; padding-bottom: 80px; }
+  .section { scroll-margin-top: 40px; }
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .section-header {
+    font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: lowercase;
+    color: var(--text); margin-bottom: 22px; padding-bottom: 10px; border-bottom: 1px dotted var(--border);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  }
+  .section-header .count { color: var(--text-3); font-weight: 400; letter-spacing: .05em; }
+  p.body { font-size: .95rem; line-height: 1.7; margin-bottom: 18px; max-width: 540px; }
+  p.body a { text-decoration: underline dotted; text-underline-offset: 3px; }
+  p.body a:hover { color: var(--c1); }
+
+  /* projects */
+  .project-grid { display: flex; flex-direction: column; gap: 26px; }
+  .project-card { position: relative; display: flex; align-items: flex-start; gap: 16px; }
+  .project-icon {
+    width: 48px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--surface);
+    display: flex; align-items: center; justify-content: center; color: var(--text);
+    transition: background-color .3s, transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .project-card:hover .project-icon { transform: rotate(-4deg) scale(1.06); }
+  .project-icon svg { width: 28px; height: 28px; overflow: visible; }
+  .project-icon img { width: 34px; height: 34px; display: block; }
+  .project-icon img.ink { width: 44px; height: 44px; }
+  [data-theme="dark"] .project-icon img.ink { filter: invert(1); }
+  .project-icon img.pixel { image-rendering: pixelated; width: 30px; height: 30px; }
+  .project-icon.emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 26px; line-height: 1; }
+  .project-info { flex: 1; min-width: 0; padding-top: 2px; }
+  .project-name {
+    font-weight: 500; font-size: 1rem; margin-bottom: 4px; color: var(--text); text-decoration: none; display: inline-block;
+    transition: font-weight .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .project-name::before { content: ""; position: absolute; inset: -6px; }
+  .project-card:hover .project-name { font-weight: 700; }
+  .project-card:hover .project-name::after { letter-spacing: .15em; }
+  .tag-new {
+    font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--bg); background: var(--c1); border-radius: 3px; padding: 2px 5px; margin-left: 6px;
+    vertical-align: 2px;
+  }
+  .project-desc { font-size: .85rem; color: var(--text-2); line-height: 1.55; max-width: 560px; transition: color .3s; }
+  .project-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; align-items: center; }
+  .project-meta .lang { font-size: .72rem; color: var(--text-3); display: inline-flex; align-items: center; gap: 6px; }
+  .project-meta .lang i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .sub-link {
+    position: relative; z-index: 1; font-size: .75rem; color: var(--text-2); text-decoration: none; font-weight: 500;
+    transition: color .2s, font-weight .25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .sub-link::after { content: " ->"; font-variant-ligatures: none; letter-spacing: -6px; padding: 0 4px; transition: letter-spacing .3s cubic-bezier(.34,1.56,.64,1); }
+  .sub-link:hover { color: var(--c1); font-weight: 700; }
+  .sub-link:hover::after { letter-spacing: .12em; }
+  .more-link { margin-top: 30px; font-size: .9rem; line-height: 1.6; color: var(--text-2); }
+  .more-link a { color: var(--text); font-weight: 500; text-decoration: none; transition: font-weight .25s; }
+  .more-link a:hover { font-weight: 700; }
+  .more-link a:hover::after { letter-spacing: .15em; }
+
+  /* letterblurd icon trick */
+
+
+  /* paper */
+  .paper {
+    border: 1px dotted var(--border-light); border-radius: 10px; padding: 22px 22px 20px;
+    background: linear-gradient(180deg, var(--surface) 0%, transparent 140%);
+    transition: border-color .3s;
+  }
+  .paper-venue { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--c1); font-weight: 600; margin-bottom: 10px; }
+  .paper-title { font-size: 1.08rem; font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+  .paper-title a { text-decoration: none; background-image: linear-gradient(var(--c1), var(--c1)); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .35s ease, color .2s; }
+  .paper-title a::after { content: " ->"; font-variant-ligatures: none; letter-spacing: -7.2px; padding: 0 4px; transition: letter-spacing .3s cubic-bezier(.34,1.56,.64,1); }
+  .paper-title a:hover { color: var(--c1); background-size: 100% 1px; }
+  .paper-title a:hover::after { letter-spacing: .15em; }
+  .paper-authors { font-size: .82rem; color: var(--text-2); line-height: 1.6; margin-bottom: 14px; }
+  .paper-authors b { color: var(--text); }
+  .paper-abs { font-size: .85rem; color: var(--text-2); line-height: 1.65; margin-bottom: 16px; max-width: 560px; }
+  .paper-links { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+  .paper-links .sub-link { font-size: .82rem; color: var(--text); }
+  .cite-btn {
+    font-family: inherit; font-size: .78rem; background: transparent; color: var(--text-2);
+    border: 1px solid var(--border-light); border-radius: 4px; padding: 3px 9px; cursor: pointer;
+    transition: color .2s, border-color .2s, background-color .2s;
+  }
+  .cite-btn:hover { color: var(--text); border-color: var(--text); }
+  .cite-btn.done { color: var(--c3); border-color: var(--c3); }
+  .paper-stats { display: flex; gap: 28px; margin-top: 18px; padding-top: 16px; border-top: 1px dotted var(--border); flex-wrap: wrap; }
+  .stat-num { font-size: 1.35rem; font-weight: 700; }
+  .stat-label { font-size: .72rem; color: var(--text-3); margin-top: 2px; max-width: 150px; line-height: 1.4; }
+
+  /* experience */
+  .experience-list { display: flex; flex-direction: column; gap: 32px; padding-left: 20px; border-left: 1px dotted var(--border-light); }
+  .exp-item { position: relative; }
+  .exp-item::before {
+    content: ""; position: absolute; left: -23.5px; top: 7px; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-3); transition: background-color .3s, transform .3s;
+  }
+  .exp-item:hover::before { background: var(--c1); transform: scale(1.5); }
+  .exp-role { font-weight: 700; font-size: 1.08rem; margin-bottom: 2px; }
+  .exp-org { font-size: .85rem; color: var(--text); margin-bottom: 2px; }
+  .exp-org a { text-decoration: none; border-bottom: 1px dotted var(--border-light); }
+  .exp-org a:hover { color: var(--c1); border-color: var(--c1); }
+  .exp-period { font-size: .78rem; color: var(--text-3); margin-bottom: 8px; }
+  .exp-desc { font-size: .88rem; color: var(--text-2); line-height: 1.6; max-width: 520px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .badge {
+    font-size: .72rem; font-weight: 500; color: var(--text-2); background: var(--surface-alt);
+    padding: 3px 8px; border-radius: 4px; white-space: nowrap; transition: color .3s, background-color .3s;
+  }
+  .sub-title { font-size: .75rem; font-weight: 600; letter-spacing: .05em; color: var(--text-3); margin: 40px 0 16px; }
+  .edu-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px dotted var(--border); font-size: .88rem; }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-row .what { font-weight: 600; }
+  .edu-row .detail { color: var(--text-2); font-size: .8rem; margin-top: 3px; line-height: 1.5; }
+  .edu-row .when { color: var(--text-3); font-size: .78rem; white-space: nowrap; padding-top: 2px; }
+
+  /* about */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: .8rem; padding: 5px 10px; border-radius: 999px; border: 1px dotted var(--border-light);
+    color: var(--text); transition: border-color .2s, color .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
+    cursor: default;
+  }
+  .chip:hover { border-style: solid; transform: translateY(-2px); }
+  .chip.c1:hover { border-color: var(--c1); color: var(--c1); }
+  .chip.c2:hover { border-color: var(--c2); color: var(--c2); }
+  .chip.c3:hover { border-color: var(--c3); color: var(--c3); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 8px; }
+  .lang-row { display: flex; align-items: center; gap: 10px; font-size: .86rem; margin-bottom: 12px; }
+  .lang-row .ln { width: 92px; flex-shrink: 0; font-weight: 600; }
+  .lang-row .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-hover); overflow: hidden; }
+  .lang-row .bar i { display: block; height: 100%; border-radius: 3px; background: var(--text); width: 0; transition: width 1s cubic-bezier(.34,1.3,.64,1); }
+  .lang-row .lv { font-size: .72rem; color: var(--text-3); width: 104px; text-align: right; flex-shrink: 0; }
+  .honor { font-size: .84rem; padding: 7px 0; border-bottom: 1px dotted var(--border); display: flex; justify-content: space-between; gap: 12px; line-height: 1.45; }
+  .honor:last-child { border-bottom: none; }
+  .honor .yr { color: var(--text-3); font-size: .75rem; white-space: nowrap; padding-top: 2px; }
+  .eye-note { margin-top: 36px; padding-top: 18px; border-top: 1px dotted var(--border); max-width: 540px; }
+  .eye-note-label { font-size: .75rem; font-weight: 700; letter-spacing: .05em; color: var(--text-3); margin-bottom: 8px; }
+  .eye-note p { font-size: .85rem; line-height: 1.65; color: var(--text-2); }
+
+  /* contact */
+  .social-grid { display: flex; flex-direction: column; gap: 14px; }
+  .social-link { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--text); font-size: 1rem; width: fit-content; }
+  .social-platform { font-weight: 700; color: var(--c1); transition: font-weight .25s cubic-bezier(.34,1.56,.64,1), color .2s; }
+  .social-link:nth-child(2) .social-platform { color: var(--c2); }
+  .social-link:nth-child(3) .social-platform { color: var(--c3); }
+  .social-link:hover .social-handle { color: var(--text); }
+  .social-platform::after { content: " ->"; font-variant-ligatures: none; letter-spacing: -7.2px; padding: 0 4px; transition: letter-spacing .3s cubic-bezier(.34,1.56,.64,1); }
+  .social-link:hover .social-platform { font-weight: 700; }
+  .social-link:hover .social-platform::after { letter-spacing: .15em; }
+  .social-handle { font-size: .85rem; color: var(--text-2); }
+  .contact-plug { margin-top: 30px; font-size: .9rem; color: var(--text-2); line-height: 1.6; max-width: 520px; }
+
+  .footer { font-size: .75rem; color: var(--text-3); padding: 28px 0 10px; border-top: 1px dotted var(--border); line-height: 1.7; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .container { padding: 24px 22px; }
+    .main-content { flex-direction: column; }
+    .left-content {
+      position: static; height: auto; width: 100%; flex: none; padding-left: 0;
+      display: flex; flex-direction: column; align-items: flex-start; margin-top: 52px;
+    }
+    .eye-wrap, .scrolled .eye-wrap { --eyew: min(19rem, 86vw); margin: 0 0 4px; padding: 6px 0; }
+    .eye-hint { margin: 0 0 18px; }
+    .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 8px 16px; margin: 22px 0 0; }
+    .sidebar-nav-link { font-size: .85rem; }
+    .sidebar-nav-link::after { display: none; }
+    .sidebar-bottom { display: none; }
+    .separator { display: none; }
+    .right-content { padding-left: 0; }
+    .hello { font-size: 3rem; margin-top: 2rem; }
+    html[lang="ja"] .hello { font-size: 2.4rem; }
+    .intro { font-size: 1.15rem; }
+    .two-col { grid-template-columns: 1fr; gap: 10px; }
+  }
+  @media (max-width: 480px) {
+    .name { font-size: 1.05rem; margin-bottom: 6px; }
+    .title { font-size: .76rem; }
+    .where { font-size: .72rem; }
+    .eye-hint { font-size: .68rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-controls">
+  <button class="theme-toggle" id="themeToggle" aria-label="Switch light / dark mode">
+    <span data-t="light" data-ja-t="ライト">light</span> / <span data-t="dark" data-ja-t="ダーク">dark</span>
+  </button>
+  <button class="lang-toggle" id="langToggle" aria-label="Switch language / 言語を切り替える">
+    <span data-l="ja">日本語</span> / <span data-l="en">EN</span>
+  </button>
+</div>
+
+<div class="container">
+  <div class="main-content">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="left-content" id="sidebar">
+      <div class="eye-col">
+      <div class="eye-wrap" id="eyeWrap" title="">
+        <pre id="eye" aria-hidden="true"></pre>
+      </div>
+      <div class="eye-hint" id="eyeHint" data-ja="どこかをクリックすると、まばたきします">click anywhere and it blinks</div>
+      </div>
+
+      <div class="info">
+        <div class="name" data-ja="マリノ・オリベロス・ブランコ">Marino Oliveros Blanco</div>
+        <div class="title" data-ja="UAB 人工知能 学士（卒業）<br>CVC 暗号解読研究<br>京都大学 交換留学">BSc AI graduate, UAB<br>Cipher decryption @ CVC<br>Exchange, Kyoto Univ.</div>
+        <div class="where" data-ja="バルセロナ ⇄ 京都">Barcelona ⇄ Kyoto</div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Sections">
+        <a href="#projects" class="sidebar-nav-link" data-ja="プロジェクト">projects</a>
+        <a href="#research" class="sidebar-nav-link" data-ja="研究">research</a>
+        <a href="#experience" class="sidebar-nav-link" data-ja="経歴">experience</a>
+        <a href="#about" class="sidebar-nav-link" data-ja="自己紹介">about</a>
+        <a href="#contact" class="sidebar-nav-link" data-ja="連絡先">contact</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div><a href="https://github.com/marinocom" target="_blank" rel="noopener">github</a> · <a href="https://www.linkedin.com/in/marino-o-3a6b171b9/" target="_blank" rel="noopener">linkedin</a></div>
+        <div id="blinkCounter">&nbsp;</div>
+      </div>
+    </aside>
+
+    <div class="separator"></div>
+
+    <!-- ================= MAIN ================= -->
+    <main class="right-content">
+      <h1 class="hello" id="hello" data-ja="こんにちは！">hello!</h1>
+
+      <p class="intro" data-ja="<b>マリノ</b>です。機械に<span class=&quot;hl-1&quot;>暗号化された写本</span>を読ませ、<span class=&quot;hl-2&quot;>失われた言語とメディア</span>を追いかけ、<span class=&quot;hl-3&quot;>実際に使われる小さなツール</span>を作っています。">I'm <b>Marino</b>. I train machines to read <span class="hl-1">encrypted manuscripts</span>, go after <span class="hl-2">lost languages and lost media</span>, and build <span class="hl-3">small tools people actually use</span>.</p>
+
+      <div class="sections">
+
+        <!-- PROJECTS -->
+        <section class="section reveal" id="projects">
+          <div class="section-header"><span class="scr" data-ja="プロジェクト">projects</span><span class="count">07</span></div>
+          <div class="project-grid">
+
+            <div class="project-card">
+              <div class="project-icon" aria-hidden="true"><img src="data:image/png;base64,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" alt=""></div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://chromewebstore.google.com/detail/letterblurd/acedopomnnlfgalcggefnmhbncoffpnp" target="_blank" rel="noopener">Letterblurd</a><span class="tag-new" data-ja="新着">new</span>
+                <div class="project-desc" data-ja="自分で評価するまで Letterboxd の評価をぼかす Chrome 拡張機能。ぼかしは毎回同じ形のダミーなので、分布もバレません。評価すると本物のグラフがふわっと現れます。自分の意見を持とう。覚えてる？">a Chrome extension that blurs Letterboxd ratings until you've rated the film yourself. The blur is a same-shaped decoy on every film, so it can't leak the real distribution. Rate it and the real chart fades in. Form your own opinion. Remember those?</div>
+                <div class="project-meta"><span class="lang"><i style="background:#f1e05a"></i>JavaScript</span><span class="lang" data-ja="Chrome ウェブストアで公開中">on the Chrome Web Store</span><a class="sub-link" href="https://github.com/marinocom/Letterblurd" target="_blank" rel="noopener" data-ja="ソースコード">source</a></div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon emoji" aria-hidden="true">☕️</div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://chromewebstore.google.com/detail/how-much-for-a-cup-of-joe/eekhlhcnjglbmhgdmknncpkmblngbmjg" target="_blank" rel="noopener">How Much for a Cup of Joe?</a>
+                <div class="project-desc" data-ja="Google マップ上で、カフェごとのコーヒーの平均価格を表示する Chrome 拡張機能。価格はユーザーが投稿するコミュニティ型で、現地通貨を自動判別してユーロ／ドル換算も表示。Chrome ウェブストアで公開中。高いコーヒーが嫌いなので作りました。">a Chrome extension for Google Maps that shows the average coffee price at every café, reported by the community, with automatic local-currency detection and conversion to euro or dollar. Live on the Chrome Web Store. Built because I hate expensive coffee.</div>
+                <div class="project-meta"><span class="lang"><i style="background:#f1e05a"></i>JavaScript · PostgreSQL</span><a class="sub-link" href="https://github.com/marinocom/CupOfJoe" target="_blank" rel="noopener" data-ja="ソースコード">source</a></div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon" aria-hidden="true"><img class="ink" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAIUElEQVR42u2deYwURRTGf+OCIqwniBwaECMYWUGCbpDDgxgDKImRI6h4gpqgiCBEFCEQJIIJSCSIYFRMAAU8MEGIRkSRQxSUU1RElCAggiAgcjr+MTXZ2t7urqO754D6ksnUVFf3VterevXeq69qU/Xq1sEhfzjDNYETgBOAgxOAE4CDE4ATQBHiJJAGxhbrC5SU1qpZrHW/B+gm0u2BEmBxsb1EqgAdsZ7Ae6J3B6EJsMUnvxT4xwkgWbQGVoW9k5sDksUqxfW0E0D+cZMTQDLQ7d2LnQDy1/hZzHUCiA/jpfQgMdE2V9zT3fkB8aAj8KpI9wMmifSfwAVAm5B7vwB+dWZoPKqnAbDTQjV1ARY6FWSONsA66feBgHL9Fc9Z4EaAOWpKHu0rwGOK8geFF1x0zlmhCiBt0XjpYhRAIaqgqy0bbgQuHB0JLYUqWWfZa0cDI33yH3dzgB5+AS4T6abAXuAvi+fsAi4ulsBctQKqy2WeRmtsKYBuwI3A5mJQQdUKbNKdLuXpOlCNgUPAHvF7mfjgBKCHWRHVxS7gCEWKQpgD0qIjnAS3KB+GhgnV4aWAxu/sBFA1NJAEBhG8NnzKw1YFdRTfn+GQc0dsC7BIfJ5zTZh7ATTxeJ/5whAy6wGnlQCe9cl7OU91f1FShaeFAKoDY/CPx1fPQ937A3cIM3ZIAbRlY1GXhkkJIKUIpOUKncWLTgJ6S6Mh33hIfG9PSgDHQq69lkOnbUHMhKyGRGNQ1AU+AIZLeefELYD7FS94TYHQUtKeclcoyl8iemx3YIZlvf4QqhDPCl2sAmiiUaZvQg3/fAROUDNFuTVSup5l/X7wyZukee9TOo5Yaw0+ZhaXk4nrx4EjwFkR7u8HTDEcVTYBwXbAUk/eGE0f6ZBqBHQwaHzIcHXiwA0RGx+gjsb+Ai9KLP7OUp+8YZr37gwTwJfAEsPKjIhxdczPCrvZUDeHqVQ/nd8nx5bT0SAVdD2wXPr9DXCYzEqTCncB70So1KNUMOGQ1i1OWlg7qRwwKNKWz7kS2OQ3Alp5Gn8vUK7Z+ABvR+wVcuMPFS8S51pBmMlpo/YetKxHcz8rqBz41qMKbMKlOy0rdbs0l1wIjPMp84LB877GjLRrQ+g9MyD/CcV9P3nD0eXASiov9dUX6VEW+v1SU69QGs6pGGnqKcP7TVXQI8BUn/xzNfyBdvIIWOnp+fVlc8miZ7yvuF4CnCf9XqgZb/Gqwtmi0VIeuz7Ih0mFTNCXW7znVIJX+lRYdgaZ7TyypLb7VMQmbH2d4nqp5LLXADqhDnGfIyyzWlKj9wqxng4EWFTlAc+fF+Nc00fXE14sEVtrC9WBTyTUNnxQA39y7d+SijqoYcpeC6wX6cMBZe7UtOu3EUyLnAL5CUenCCZCbfehAerqygHAZKLTY2ajt3lbRi2LNjFRty9bTtBVBNBFUc67DpB10AZqVHKsxlygG+YwNYHD1FmngPzBmK1JhGGvrgB2K8o18Pz+VHxPxJ8Q68XEkGsnpHTXiCP6IgPP/GPC9yeokI313KeY55QCSAGrI7z0KOEwqdRQDZ/8B6T0CmB+RAGcMCy/NSD/P/TY2NmJP8wZuyUX9PRxGosafkt1b0rpr2Ke33QIA2cTHIkNNR+pCDsvozKn1S+04oeBQFpXAL9plFkfcm0FGTrL3cLDhapEr0ExGxXDI4yYyYqjEtr6eLtBWuB8n7wewATdEdAOaOQJIgX1uKUB19pKRNyspXUv+uvKrTQFsAeYKdLTNMqfZRBKaQ2sFd9+HvM4g445x0QFLTUYDR18PMBUyIJJ3DhPMkWXo8esDupMHX16fguLug8M8UG66tjfR6WektLkejYVYYMyg7DF2pDr32k+Z7+UfkujfIuQ2NCtVFAvN8S04e9pydF9HZivMwJ+xi6qWabYxeL1YCfEOBLiOLRpE57QMfCh5bOmiQ42VgqJ99X1QMsSOIPnX+JnX19pYn9L6I3/6tgUYAeV6Y+qeeXCgGjCw1J6psRnUgrgKmAjydAK8QlfR0E2lj/S8L6FISbqJ1QOri2IIYzR28QPWGAYi8FgWxE+HJ0yotv9jUjmGJw3hPkYRgg+Lllhfphp6ojtMbSrMeCZorkYjwZzI+1DEdTFPvQXdeZqlC/V7f06AmgtpTfngOVmExKRmRsjiR9eq+dJRfnjSXBDV8f8UjU0JlIVengEOZhMXCppTMQsICirWCMBTNQ4KsYW2zDbg4APDXwOlRdrxkeoz4GA0HYji2fdFuDn/G66R+xH4VAlteU/raCO9CGzUlYmHKwBYng/Q1U2Xt0E6rMVPU6s6ln7wybuaiGnTDUlf+ghPjpoFsPfa6dhUg633JJVbjMHfBTjIkkQbozhGaWaVowKXTWEMtqS+LU56iQ8PyEB7I5w7wihFuM6J3powClcWB6tnMUiGyuoZ4KTLx5evc0oGJbn3Zlh2EDFqS+7UKyGBc0BA6jM7koSSwy5lN/nqCFtqfG1qRxNtfIDNmrEy+N2dLpTNX7fXYzGnmSCXEk2/jxPfY5ZPqe+tKa83vaognSxHgWf40MCCYgcrzd5hncE9MJur9Opgp4xzAGpKAc2dTQkHp0qGEPmsMC5+T4tpSUVDOPp2G8+cLBUQWsSDMA5aIyA03ECLpgR0MU1R34F0N41R35VULqY/x1UsY8A7yLIDNc0uR0B+6hMInW9P8cjQF6xme6aJfcC2Obs/0RQgmILVlYFOfs/GdRXnRxQTSKz1qJiMcEhHuzUUUEdpO2cs1yb5X4OaGXAyXFIQABZTs0O4HPXJLkXwLAIxFiHGGNBa1xz5McTTjvz0/0fsdNeAO+6psgP/gcSu37tpR700wAAAABJRU5ErkJggg==" alt=""></div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://github.com/marinocom/Direct-Image-Decryption-Copiale" target="_blank" rel="noopener">Direct Image Decryption</a>
+                <div class="project-desc" data-ja="18世紀の暗号写本「コピアレ暗号」の画像から、文字起こしを経ずに直接平文を出力するエンドツーエンドモデル（CRNN ＋ アテンション付き LSTM）。合成データ生成パイプラインも構築。DECRYPT プロジェクトの一環で、HistoCrypt 2026 で発表。">an end-to-end model (CRNN + attention-based LSTM) that reads images of the 18th-century Copiale cipher and outputs German plaintext directly, skipping transcription. Includes a synthetic cipher data generator. Part of the DECRYPT project, published at HistoCrypt 2026.</div>
+                <div class="project-meta"><span class="lang"><i style="background:#3572a5"></i>Python · PyTorch</span><a class="sub-link" href="#research" data-ja="論文">paper</a><a class="sub-link" href="https://github.com/marinocom/Direct-Image-Decryption-TFG" target="_blank" rel="noopener" data-ja="卒業論文リポジトリ">thesis repo</a></div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 28 28" fill="none" stroke-linecap="round">
+                  <defs><linearGradient id="thermo" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="var(--c1)"/><stop offset="1" stop-color="var(--c2)"/></linearGradient></defs>
+                  <path d="M11.5 5.5a2.5 2.5 0 0 1 5 0v10.2a4.6 4.6 0 1 1-5 0z" stroke="currentColor" stroke-width="1.6"/>
+                  <circle cx="14" cy="19.6" r="2.6" fill="url(#thermo)"/>
+                  <path d="M14 17V9" stroke="url(#thermo)" stroke-width="2"/>
+                  <path d="M20 9h2.5M20 12h1.6M20 15h2.5" stroke="currentColor" stroke-width="1.2" opacity=".6"/>
+                </svg>
+              </div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://github.com/marinocom/Early-detection-of-neonatal-sepsis-using-thermal-images" target="_blank" rel="noopener" data-ja="新生児敗血症の早期発見">Early Neonatal Sepsis Detection</a>
+                <div class="project-desc" data-ja="NICU の新生児を熱画像で非侵襲的に見守り、敗血症の兆候を早期に検出する AI。パトラス大学病院の臨床医と共同開発。モダリティ整列、姿勢推定（HRNet-W48）、体幹と末梢の温度差（3.5°C 以上）の抽出を組み合わせ、71 名の新生児データで検証。">non-invasive, real-time sepsis screening for newborns in NICUs from thermal images, built with clinicians at the General University Hospital of Patras. Modality alignment, pose estimation (HRNet-W48) and core–peripheral thermal gradients (&gt;3.5°C), validated on 71 neonates.</div>
+                <div class="project-meta"><span class="lang"><i style="background:#da5b0b"></i>Python · OpenCV · HRNet</span></div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon" aria-hidden="true"><img class="pixel" src="data:image/png;base64,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" alt=""></div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://github.com/marinocom/fushimi-in-airy" target="_blank" rel="noopener">fushimi-in-airy</a>
+                <div class="project-desc" data-ja="京都・伏見稲荷大社に着想を得たディレイ／リバーブのオーディオプラグイン。山のグリッド上で鳥居をドラッグして、ディレイタップやリバーブを配置します。朝はディレイ、夜はリバーブ。Leela Koushik Korampalli との共作。">a delay-reverb audio plug-in inspired by Kyoto's Fushimi Inari shrine. Drag torii gates across a mountain grid to place delay taps and Schroeder reverbs: climb it in the morning (delay), descend at night (reverb). Made with Leela Koushik Korampalli.</div>
+                <div class="project-meta"><span class="lang"><i style="background:#3572a5"></i>Python · NumPy · Numba</span></div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 28 28" fill="none" stroke-linejoin="round">
+                  <rect x="5" y="17" width="6" height="6" fill="var(--c3)"/>
+                  <rect x="11" y="17" width="6" height="6" fill="var(--c3)" opacity=".75"/>
+                  <rect x="17" y="17" width="6" height="6" fill="var(--c2)"/>
+                  <rect x="11" y="11" width="6" height="6" fill="var(--c1)"/>
+                  <rect x="11" y="3.5" width="6" height="6" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.4"/>
+                </svg>
+              </div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://godofstackers.com/about" target="_blank" rel="noopener">God of Stackers</a>
+                <div class="project-desc" data-ja="ブラウザで遊べるリアルタイムのオンライン対戦ゲーム。登録プレイヤーは 1,000 人以上。ゲーム開発者として参加。">a browser-based, real-time online video game with more than 1,000 registered players. I'm one of its game developers.</div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon" aria-hidden="true">
+                <svg viewBox="0 0 28 28" fill="none" stroke-linecap="round">
+                  <path d="M3 8V4.5h3.5M21.5 4.5H25V8M25 20v3.5h-3.5M6.5 23.5H3V20" stroke="var(--c1)" stroke-width="1.6"/>
+                  <rect x="6" y="10" width="16" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                  <text x="14" y="16.2" font-size="5.2" text-anchor="middle" fill="currentColor" font-family="Courier Prime, Courier New, Courier, monospace" font-weight="700">1234ABC</text>
+                </svg>
+              </div>
+              <div class="project-info">
+                <a class="project-name arrow-after" href="https://github.com/marinocom/ANPR-GIA" target="_blank" rel="noopener" data-ja="ナンバープレート自動認識">ANPR</a>
+                <div class="project-desc" data-ja="YOLO11 を使ったナンバープレートの自動検出・認識。">automatic number plate recognition with YOLO11: detect the plate, then read it.</div>
+                <div class="project-meta"><span class="lang"><i style="background:#da5b0b"></i>Python · YOLO11</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="more-link"><span data-ja="ほかのプロジェクト（画像キャプション、否定・不確実性検出の NLP、音楽ネットワーク分析など）は">more (image captioning, NLP negation &amp; uncertainty detection, music network analysis…) on</span> <a class="arrow-after" href="https://github.com/marinocom?tab=repositories" target="_blank" rel="noopener">github</a></div>
+        </section>
+
+        <!-- RESEARCH -->
+        <section class="section reveal" id="research">
+          <div class="section-header"><span class="scr" data-ja="研究">research</span><span class="count" data-ja="論文">publication</span></div>
+          <article class="paper">
+            <div class="paper-venue">HistoCrypt 2026 · 9th International Conference on Historical Cryptology</div>
+            <h2 class="paper-title"><a href="https://hdl.handle.net/10062/122084" target="_blank" rel="noopener">Joint Transcription and Decryption of Images of Encrypted Handwritten Documents: A Comparison with the Traditional Pipeline</a></h2>
+            <div class="paper-authors"><b>Marino Oliveros-Blanco</b>, Lei Kang, Alicia Fornés, Beáta Megyesi<br><span data-ja="コンピュータビジョンセンター（UAB）・ストックホルム大学">Computer Vision Center (UAB) · Stockholm University</span></div>
+            <p class="paper-abs" data-ja="歴史的な暗号写本の解読は通常、①画像から暗号記号を文字起こしし、②それを復号する、という二段階で行われます。しかし、文字起こしの誤りはそのまま最終結果に伝播します。本論文では、写本画像から直接平文を出力する「Direct Image Decryption」を提案。コピアレ暗号を題材に、大規模な合成データ生成パイプラインを構築し、従来手法と比較しました。画像から平文への一体型モデルは、従来の文字起こしベースの手法に代わる有望な選択肢です。">Deciphering historical encrypted manuscripts usually takes two steps: transcribe the cipher symbols from the image, then decrypt them. Transcription errors propagate straight into the plaintext. We propose <i>Direct Image Decryption</i>, an end-to-end model that maps manuscript images straight to plaintext. Using the Copiale cipher as a case study, we built a synthetic data pipeline for large-scale training and compared the joint model against the traditional pipeline. Joint image-to-plaintext modelling turns out to be a promising alternative.</p>
+            <div class="paper-links">
+              <a class="sub-link" href="https://arxiv.org/abs/2606.27700" target="_blank" rel="noopener">arXiv</a>
+              <a class="sub-link" href="https://arxiv.org/pdf/2606.27700" target="_blank" rel="noopener">PDF</a>
+              <a class="sub-link" href="https://hdl.handle.net/10062/122084" target="_blank" rel="noopener" data-ja="論文集">proceedings</a>
+              <a class="sub-link" href="https://github.com/marinocom/Direct-Image-Decryption-Copiale" target="_blank" rel="noopener" data-ja="コード">code</a>
+              <button class="cite-btn" id="citeBtn" type="button" data-ja="BibTeX をコピー">copy BibTeX</button>
+            </div>
+            <div class="paper-stats">
+              <div><div class="stat-num">~100</div><div class="stat-label" data-ja="種類の暗号記号">distinct cipher glyphs</div></div>
+              <div><div class="stat-num">4–5%</div><div class="stat-label" data-ja="従来の二段階手法からの改善">improvement over the two-step pipeline</div></div>
+              <div><div class="stat-num">2 → 1</div><div class="stat-label" data-ja="文字起こしと復号を一つのモデルで">transcription and decryption in one model</div></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section class="section reveal" id="experience">
+          <div class="section-header"><span class="scr" data-ja="経歴">experience</span></div>
+          <div class="experience-list">
+            <div class="exp-item">
+              <div class="exp-role" data-ja="研究インターン：手書き暗号の解読">Research Intern: Handwritten Cipher Decryption</div>
+              <div class="exp-org"><a href="https://www.cvc.uab.es/" target="_blank" rel="noopener" data-ja="コンピュータビジョンセンター（CVC）">Computer Vision Center (CVC)</a> · <span data-ja="バルセロナ">Barcelona</span></div>
+              <div class="exp-period" data-ja="2025年4月 – 現在">Apr 2025 – present</div>
+              <div class="exp-desc" data-ja="名高い DECRYPT プロジェクトの一員として、コピアレ暗号をはじめとする歴史的な手書き暗号の直接解読を研究。従来の「文字起こし→復号」の二段階手法を 4〜5% 上回り、成果は HistoCrypt 2026 に採択されました。研究の優秀さが認められ、ロサ・センサット・タレント奨学金を受賞。">Researching direct decryption of handwritten historical ciphers, including the Copiale cipher, as part of the DECRYPT project. Beat the traditional transcribe-then-decrypt pipeline by 4–5%, with the results accepted at HistoCrypt 2026. Awarded the Rosa Sensat Talent Scholarship for research excellence.</div>
+              <div class="badges"><span class="badge">PyTorch</span><span class="badge">Computer Vision</span><span class="badge">HTR</span><span class="badge">Seq2Seq</span><span class="badge">Synthetic Data</span></div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="共同創設者">Co-Founder</div>
+              <div class="exp-org"><a href="https://uabthehack.cat" target="_blank" rel="noopener">UAB THE HACK!</a> · <span data-ja="バルセロナ">Barcelona</span></div>
+              <div class="exp-period" data-ja="2024年1月 – 2025年1月">Jan 2024 – Jan 2025</div>
+              <div class="exp-desc" data-ja="バルセロナ自治大学（UAB）初のハッカソンを共同創設。4 回開催（最新回は海賊テーマ）、延べ 500 人以上が参加。Glovo、CaixaBank Tech、Deloitte などのスポンサーを獲得し、運営と参加者体験を統括。Devpost コミュニティとウェブサイトも構築。">Co-founded the first hackathon at the Autonomous University of Barcelona. Four editions (the latest one pirate-themed) and 500+ participants in total. Secured sponsors like Glovo, CaixaBank Tech and Deloitte, ran logistics and participant experience, and built the Devpost community and website.</div>
+              <div class="badges"><span class="badge" data-ja="イベント運営">Event Organisation</span><span class="badge" data-ja="スポンサー獲得">Sponsorship</span><span class="badge" data-ja="コミュニティ">Community</span></div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="学生代表">Student Representative</div>
+              <div class="exp-org"><span data-ja="UAB 学生会 副会長 · RITSI メンバー">UAB Student Body Vice-President · RITSI member</span></div>
+              <div class="exp-period" data-ja="学部在学中">during my BSc</div>
+              <div class="exp-desc" data-ja="UAB 学生会の副会長を務め、RITSI のメンバーとして、スペイン政府に対し全国の情報系大学生を代表。BP ディベートクラブにも所属。">Vice-president of the UAB student body and RITSI member, representing Spain's tech university students before the Spanish government. Also on the BP debate club.</div>
+              <div class="badges"><span class="badge" data-ja="リーダーシップ">Leadership</span><span class="badge" data-ja="政策">Policy</span><span class="badge" data-ja="ディベート">Debate</span></div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="語学教育ボランティア">Language Education Volunteer</div>
+              <div class="exp-org"><span data-ja="京都市国際交流協会 · 左京図書館">Kyoto City International Foundation · Sakyo Ward Library</span></div>
+              <div class="exp-period" data-ja="2025年9月 – 現在">Sep 2025 – present</div>
+              <div class="exp-desc" data-ja="京都の子どもたちに、スペイン語とスペイン文学の基礎を教えています。">Teaching children in Kyoto the fundamentals of Spanish language and literature.</div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="高齢者介護ボランティア">Elderly Care Volunteer</div>
+              <div class="exp-org"><span data-ja="カリタス・スペイン · サラゴサ">Cáritas Española · Zaragoza</span></div>
+              <div class="exp-period">2021 – 2022</div>
+              <div class="exp-desc" data-ja="カリタスの高齢者ホームで 1 年間、入居者の話し相手やサポートを担当。">A year of companionship and support for residents of a Cáritas home for the elderly.</div>
+            </div>
+          </div>
+
+          <div class="sub-title" data-ja="学歴">education</div>
+          <div class="edu-row">
+            <div><div class="what" data-ja="バルセロナ自治大学（UAB）">Autonomous University of Barcelona (UAB)</div><div class="detail" data-ja="人工知能 学士 · 卒業 · GPA 8.40 / 10">BSc Artificial Intelligence · graduated · GPA 8.40 / 10</div></div>
+            <div class="when">2022 – 2026</div>
+          </div>
+          <div class="edu-row">
+            <div><div class="what" data-ja="京都大学">Kyoto University</div><div class="detail" data-ja="交換留学（情報学）· データ分析、Python 機械学習、交渉学">Exchange, BSc Informatics · Data Analysis, Python Machine Learning, Negotiation</div></div>
+            <div class="when">2025 – 2026</div>
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section reveal" id="about">
+          <div class="section-header"><span class="scr" data-ja="自己紹介">about</span></div>
+          <p class="body" data-ja="世界には、まだ誰にも読めない文字があります。ラパ・ヌイ（イースター島）の木板に刻まれたロンゴロンゴは、一度も解読されていません。インカの人々は結び目のついた紐「キープ」で記録を残しました。数字はおおよそ読めるようになりましたが、そこに込められた物語は今も読めないままです。">Some of the most interesting writing in the world still can't be read. <b>Rongorongo</b>, the glyphs carved into a couple of dozen wooden tablets from Rapa Nui, has never been deciphered. The Inca kept their records in <b>khipu</b>, knotted cords whose numbers we have mostly worked out but whose stories we still can't read.</p>
+          <p class="body" data-ja="私が取り組みたいのは、そうした「書かれ、記録され、暗号化され、そして失われたもの」を取り戻すことです。これまでの研究では、18世紀の秘密結社が残したコピアレ暗号を、画像から直接読むモデルを作りました。次は同じ考え方を、まだ誰も解けていない文字や、失われたメディアへと広げたいと思っています。">That's the work I want to do: recover what was written, recorded or encoded and then lost. My research so far taught a model to read the Copiale cipher, an 18th-century secret society's manuscript, straight from the page. Next I want to take the same ideas to scripts no one has cracked, and to lost media.</p>
+          <p class="body" data-ja="バルセロナ自治大学（UAB）で人工知能の学士号を取得（京都大学に1年間留学）。研究以外では、映画、安いコーヒー探し、ちょっと変わった音楽ツール作り、そしてディベート。">I hold a BSc in Artificial Intelligence from UAB, with a year at Kyoto University. Away from research: films, the hunt for cheap coffee, odd little music tools, and debate.</p>
+
+          <div class="sub-title" data-ja="研究の関心">research interests</div>
+          <div class="chips">
+            <span class="chip c1" data-ja="暗号解読">Cipher Decryption</span>
+            <span class="chip c2" data-ja="文書解析">Document Analysis</span>
+            <span class="chip c3" data-ja="医療画像">Medical Imaging</span>
+            <span class="chip c1" data-ja="グラフニューラルネットワーク">Graph Neural Networks</span>
+            <span class="chip c2" data-ja="グラフ表現学習">Representation Learning on Graphs</span>
+            <span class="chip c3" data-ja="説明可能性">Explainability</span>
+            <span class="chip c1" data-ja="AI 政策">AI Policy</span>
+          </div>
+
+          <div class="sub-title" data-ja="好きなこと">things I like</div>
+          <div class="chips">
+            <span class="chip c2" data-ja="🎬 映画">🎬 films</span>
+            <span class="chip c1" data-ja="☕ 安いコーヒー">☕ cheap coffee</span>
+            <span class="chip c3" data-ja="⛩ 京都">⛩ Kyoto</span>
+            <span class="chip c2" data-ja="🎛 オーディオ・音楽">🎛 audio &amp; music</span>
+            <span class="chip c1" data-ja="🗣 ディベート">🗣 debate</span>
+            <span class="chip c3" data-ja="💻 ハッカソン">💻 hackathons</span>
+            <span class="chip c2" data-ja="🔐 未解読の文字">🔐 undeciphered scripts</span>
+            <span class="chip c1" data-ja="🌍 言語">🌍 languages</span>
+          </div>
+
+          <div class="two-col">
+            <div>
+              <div class="sub-title" data-ja="言語">languages</div>
+              <div class="chips">
+                <span class="chip c1" data-ja="スペイン語">Spanish</span>
+                <span class="chip c2" data-ja="英語">English</span>
+                <span class="chip c3" data-ja="カタルーニャ語">Catalan</span>
+                <span class="chip c1" data-ja="日本語">Japanese</span>
+              </div>
+            </div>
+            <div>
+              <div class="sub-title" data-ja="受賞・奨学金">honors</div>
+              <div class="honor"><span data-ja="ロサ・センサット・タレント奨学金（CVC）">Rosa Sensat Talent Scholarship, CVC</span><span class="yr">2025</span></div>
+              <div class="honor"><span data-ja="EDU4SDGs EU 奨学金・大学代表">EDU4SDGs EU Scholarship, UAB representative</span><span class="yr">2025</span></div>
+              <div class="honor"><span data-ja="ラモン・アレセス学業優秀奨学金 ×4">Ramón Areces Academic Excellence ×4</span><span class="yr">2022–25</span></div>
+              <div class="honor"><span data-ja="Becas Europa 学業優秀プログラム">Becas Europa Excellence Program</span><span class="yr">2022</span></div>
+              <div class="honor"><span data-ja="オルテガ・イ・ガセット夏期講座奨学金">Aula de Verano Ortega y Gasset</span><span class="yr">2022</span></div>
+            </div>
+          </div>
+
+          <div class="eye-note"><div class="eye-note-label" data-ja="なぜ目？">why the eye?</div><p data-ja="研究の中心にあるコピアレ暗号は、解読してみると「オクリスト（眼科医団）」という秘密結社の儀式を記したものでした。">The Copiale cipher, the manuscript at the heart of my research, turned out to describe the rituals of a secret society called the Oculists.</p></div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section reveal" id="contact">
+          <div class="section-header"><span class="scr" data-ja="連絡先">contact</span></div>
+          <div class="social-grid">
+            <a class="social-link" href="mailto:marino.oliverosblanco@gmail.com"><span class="social-platform" data-ja="メール">email</span><span class="social-handle">marino.oliverosblanco@gmail.com</span></a>
+            <a class="social-link" href="https://www.linkedin.com/in/marino-o-3a6b171b9/" target="_blank" rel="noopener"><span class="social-platform">linkedin</span><span class="social-handle">in/marino-o</span></a>
+            <a class="social-link" href="https://github.com/marinocom" target="_blank" rel="noopener"><span class="social-platform">github</span><span class="social-handle">@marinocom</span></a>
+            <a class="social-link" href="https://huggingface.co/nahhhhhhh" target="_blank" rel="noopener"><span class="social-platform">hugging face</span><span class="social-handle">@nahhhhhhh</span></a>
+          </div>
+          <p class="contact-plug" data-ja="研究の共同作業、インターン、ハッカソン、またはおすすめの安いカフェの情報など、気軽に連絡してください。">Open to research collaborations, internships, hackathons, and tips on where to find a good cheap coffee. Say hi.</p>
+        </section>
+
+        <footer class="footer">
+          <div data-ja="© 2026 マリノ・オリベロス・ブランコ · バルセロナと京都で制作">© 2026 Marino Oliveros Blanco · made between Barcelona and Kyoto</div>
+          <div id="footBlinks" data-ja="この目はまだ一度もまばたきしていません。">the eye hasn't blinked yet.</div>
+        </footer>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  /* ================= i18n ================= */
+  var i18nEls = Array.prototype.slice.call(document.querySelectorAll('[data-ja]'));
+  i18nEls.forEach(function (el) { el.setAttribute('data-en', el.innerHTML); });
+  var lang = root.getAttribute('lang') === 'ja' ? 'ja' : 'en';
+  var langBtn = document.getElementById('langToggle');
+
+  function applyLang(l, animate) {
+    lang = l;
+    root.setAttribute('lang', l);
+    i18nEls.forEach(function (el) {
+      if (el.classList.contains('scr') || el.id === 'hello') return;
+      el.innerHTML = el.getAttribute('data-' + l);
+    });
+    langBtn.querySelectorAll('[data-l]').forEach(function (s) { s.classList.toggle('on', s.getAttribute('data-l') === l); });
+    document.title = l === 'ja' ? 'マリノ・オリベロス・ブランコ' : 'Marino Oliveros Blanco';
+    var hello = document.getElementById('hello');
+    copialeHello(hello, hello.getAttribute('data-' + l), animate ? 450 : 1200);
+    document.querySelectorAll('.scr').forEach(function (el) {
+      var txt = el.getAttribute('data-' + l);
+      if (el.dataset.revealed || animate) decrypt(el, txt, 600); else el.textContent = txt;
+    });
+    updateBlinkText();
+    if (typeof paintThemeBtn === 'function') paintThemeBtn();
+  }
+  langBtn.addEventListener('click', function () {
+    var next = lang === 'en' ? 'ja' : 'en';
+    store('mob-lang', next);
+    applyLang(next, true);
+  });
+
+  /* ================= theme ================= */
+  var themeBtn = document.getElementById('themeToggle');
+  function paintThemeBtn() {
+    var t = root.getAttribute('data-theme');
+    themeBtn.querySelectorAll('[data-t]').forEach(function (sp) {
+      sp.classList.toggle('on', sp.getAttribute('data-t') === t);
+      sp.textContent = lang === 'ja' ? sp.getAttribute('data-ja-t') : sp.getAttribute('data-t');
+    });
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    store('mob-theme', next);
+    paintThemeBtn();
+  });
+
+  /* ================= hello: Copiale cipher -> plaintext ================= */
+  function copialeHello(el, text, hold) {
+    if (el._raf) cancelAnimationFrame(el._raf);
+    var chars = Array.from(text);
+    if (reduceMotion) { el.textContent = text; return; }
+    function pick() { return GLYPHS[(Math.random() * GLYPHS.length) | 0]; }
+    var cipher = chars.map(function (c) { return c === ' ' ? ' ' : pick(); });
+    el.innerHTML = '';
+    var spans = chars.map(function (c, i) {
+      var sp = document.createElement('span');
+      sp.className = 'cg'; sp.textContent = cipher[i];
+      el.appendChild(sp); return sp;
+    });
+    el.setAttribute('aria-label', text);
+    var STEP = 120, FLICK = 160, start = performance.now(), lastSwap = 0;
+    function frame(now) {
+      var t = now - start, done = true, swap = now - lastSwap > 50;
+      if (swap) lastSwap = now;
+      for (var i = 0; i < chars.length; i++) {
+        var t0 = hold + i * STEP;
+        if (t < t0) { done = false; continue; }
+        if (t < t0 + FLICK) { done = false; if (swap) spans[i].textContent = pick(); spans[i].className = 'cg flick'; continue; }
+        if (spans[i].className !== 'pl') { spans[i].textContent = chars[i]; spans[i].className = 'pl'; }
+      }
+      el._raf = done ? null : requestAnimationFrame(frame);
+    }
+    el._raf = requestAnimationFrame(frame);
+  }
+
+  /* ================= cipher "decrypt" text effect ================= */
+  // glyphs in the spirit of the Copiale cipher alphabet: accented Roman letters, Greek, abstract signs
+  var GLYPHS = 'ŷpôŵʒĉâλʌŋħΓπσΔüêîñżŕĝ⊔△ʘ∴';
+  function decrypt(el, finalText, duration) {
+    if (!el) return;
+    if (el._raf) cancelAnimationFrame(el._raf);
+    var text = (function () { var d = document.createElement('div'); d.innerHTML = finalText; return d.textContent; })();
+    if (reduceMotion) { el.textContent = text; return; }
+    var chars = Array.from(text);
+    var reveal = chars.map(function (c, i) { return (i / Math.max(1, chars.length)) * duration * 0.7 + Math.random() * duration * 0.3; });
+    var start = performance.now();
+    var lastSwap = 0, current = chars.map(function () { return GLYPHS[(Math.random() * GLYPHS.length) | 0]; });
+    function frame(now) {
+      var t = now - start, done = true, swap = now - lastSwap > 55;
+      if (swap) lastSwap = now;
+      var out = '';
+      for (var i = 0; i < chars.length; i++) {
+        if (t >= reveal[i] || chars[i] === ' ') { out += chars[i]; }
+        else {
+          done = false;
+          if (swap) current[i] = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          out += current[i];
+        }
+      }
+      el.textContent = out;
+      if (!done) el._raf = requestAnimationFrame(frame); else el._raf = null;
+    }
+    el._raf = requestAnimationFrame(frame);
+  }
+
+  /* ================= THE EYE (ascii) ================= */
+  var pre = document.getElementById('eye');
+  var eyeWrap = document.getElementById('eyeWrap');
+  // hand-drawn frames; the iris is drawn into whatever space each frame encloses
+  var FRAMES = {"open": ["        \\    \\   |  |   /    /        ", "            _.--''''''--._            ", "        _.-'              '-._        ", "     .-'                      '-.     ", "   .'                            '.   ", "  <                                >  ", "   '.                            .'   ", "     '-.                      .-'     ", "        '-._              _.-'        ", "            ''--......--''            ", "                                      "], "half": ["                                      ", "                                      ", "         \\    \\  |  |  /    /         ", "        _.--''''''''''''''--._        ", "   _.-''                      ''-._   ", "  <                                >  ", "   '.                            .'   ", "     '-.                      .-'     ", "        '-._              _.-'        ", "            ''--......--''            ", "                                      "], "quart": ["                                      ", "                                      ", "                                      ", "                                      ", "       \\    \\    |  |    /    /       ", "  <__..---''''''''''''''''''---..__>  ", "   '.                            .'   ", "     '-.                      .-'     ", "        '-._              _.-'        ", "            ''--......--''            ", "                                      "], "closed": ["                                      ", "                                      ", "                                      ", "                                      ", "                                      ", "  <                                >  ", "   '.                            .'   ", "     '-.                      .-'     ", "        '-._              _.-'        ", "            ''--......--''            ", "         /    /  |  |  \\    \\         "]};
+  var LASH_ROWS = { open: 0, half: 2, quart: 4, closed: 10 };
+  var ROWS = 11, COLS = 38, CW = 0.6;
+  var X0 = (COLS / 2) * CW, Y0 = 5.5;   // eye centre in cell units (cell = 0.6 wide, 1 tall)
+  var RI = 3.3, MAXX = 5.2, MAXY = 1.0;
+
+  // interior mask per frame (4-connected flood fill from inside the almond)
+  var MASK = {};
+  Object.keys(FRAMES).forEach(function (name) {
+    var f = FRAMES[name], m = [], r, c;
+    for (r = 0; r < ROWS; r++) { m.push([]); for (c = 0; c < COLS; c++) m[r].push(false); }
+    if (name !== 'closed') {
+      var stack = [[7, 19]], n = 0;
+      while (stack.length) {
+        var p = stack.pop(), pr = p[0], pc = p[1];
+        if (pr < 0 || pr >= ROWS || pc < 0 || pc >= COLS) { n = 1e9; break; }
+        if (m[pr][pc] || f[pr][pc] !== ' ') continue;
+        if (pr === 0 || pr === ROWS - 1 || pc === 0 || pc === COLS - 1) { n = 1e9; break; }
+        m[pr][pc] = true; n++;
+        stack.push([pr + 1, pc], [pr - 1, pc], [pr, pc + 1], [pr, pc - 1]);
+      }
+      if (n > 1e6) for (r = 0; r < ROWS; r++) for (c = 0; c < COLS; c++) m[r][c] = false;
+    }
+    MASK[name] = m;
+  });
+
+  function esc(ch) { return ch === '<' ? '&lt;' : ch === '>' ? '&gt;' : ch === '&' ? '&amp;' : ch; }
+
+  function renderEye(o, ix, iy, pr) {
+    var name = o > 0.78 ? 'open' : o > 0.48 ? 'half' : o > 0.16 ? 'quart' : 'closed';
+    var f = FRAMES[name], m = MASK[name], lashRow = LASH_ROWS[name];
+    var cx = X0 + ix, cy = Y0 + iy, out = '';
+    for (var r = 0; r < ROWS; r++) {
+      var cur = null, buf = '';
+      for (var c = 0; c < COLS; c++) {
+        var ch = f[r][c], cl = '';
+        if (m[r][c]) {
+          var x = (c + 0.5) * CW, y = r + 0.5, dx = x - cx, dy = y - cy, d = Math.hypot(dx, dy);
+          if (Math.abs(dx + 1.25) < 0.31 && Math.abs(dy + 1.0) < 0.5 && d < RI) { ch = "'"; cl = 'a-glint'; }
+          else if (d < pr) { ch = '@'; cl = 'a-pupil'; }
+          else if (d < RI - 0.55) { ch = ':'; cl = 'a-iris2'; }
+          else if (d < RI + 0.1) { ch = 'o'; cl = 'a-limbal'; }
+        } else if (r === lashRow && ch !== ' ') cl = 'a-lash';
+        if (cl !== cur) { if (cur) buf += '</span>'; if (cl) buf += '<span class="' + cl + '">'; cur = cl; }
+        buf += esc(ch);
+      }
+      if (cur) buf += '</span>';
+      out += buf + (r < ROWS - 1 ? '\n' : '');
+    }
+    return out;
+  }
+
+  // state
+  var pointer = null, lastMove = -1e9, hoverLink = false;
+  var cur = { x: 0, y: 0 }, target = { x: 0, y: 0 }, pupR = 1.15;
+  var openness = 1, blinkStart = null, blinkQueued = 0, blinks = 0;
+  var idleNext = 0, lastKey = '';
+  var rect = null;
+  function measure() { rect = pre.getBoundingClientRect(); }
+  window.addEventListener('resize', function () { rect = null; });
+  window.addEventListener('scroll', function () { rect = null; }, { passive: true });
+
+  window.addEventListener('pointermove', function (e) {
+    pointer = { x: e.clientX, y: e.clientY };
+    lastMove = performance.now();
+  }, { passive: true });
+  document.addEventListener('pointerover', function (e) {
+    hoverLink = !!(e.target.closest && e.target.closest('a, button, .chip'));
+  });
+  document.addEventListener('mouseleave', function () { pointer = null; });
+
+  function blink(times) {
+    times = times || 1;
+    if (blinkStart === null) { blinkStart = performance.now(); blinkQueued = times - 1; }
+    else blinkQueued = Math.max(blinkQueued, 1);
+    blinks += 1;
+    updateBlinkText();
+  }
+  window.addEventListener('pointerdown', function (e) {
+    pointer = { x: e.clientX, y: e.clientY };
+    lastMove = performance.now();
+    blink(eyeWrap.contains(e.target) ? 2 : 1);
+  });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') blink(1); });
+
+  function easeIn(t) { return t * t; }
+  function easeOut(t) { return 1 - (1 - t) * (1 - t); }
+
+  function tick(now) {
+    if (blinkStart !== null) {
+      var e = now - blinkStart, CLOSE = 75, HOLD = 70, OPEN = 130;
+      if (e < 0) openness = 1;
+      else if (e < CLOSE) openness = 1 - easeIn(e / CLOSE);
+      else if (e < CLOSE + HOLD) openness = 0;
+      else if (e < CLOSE + HOLD + OPEN) openness = easeOut((e - CLOSE - HOLD) / OPEN);
+      else {
+        openness = 1;
+        if (blinkQueued > 0) { blinkQueued--; blinkStart = now + 70; } else blinkStart = null;
+      }
+    }
+
+    if (!rect) measure();
+    var ex = rect.left + rect.width / 2, ey = rect.top + rect.height / 2;
+    var near = false;
+    if (pointer && now - lastMove < 4000) {
+      var dx = pointer.x - ex, dy = pointer.y - ey, d = Math.hypot(dx, dy);
+      var k = Math.min(1, d / Math.max(180, rect.width * 1.4));
+      var ang = Math.atan2(dy, dx);
+      target.x = Math.cos(ang) * MAXX * k;
+      target.y = Math.sin(ang) * MAXY * k;
+      near = d < rect.width * 0.22;
+    } else if (now > idleNext) {
+      var a2 = Math.random() * Math.PI * 2, k2 = Math.random() * 0.85;
+      target.x = Math.cos(a2) * MAXX * k2;
+      target.y = Math.sin(a2) * MAXY * k2;
+      idleNext = now + 1400 + Math.random() * 2200;
+    }
+    var ease = reduceMotion ? 0.35 : 0.14;
+    cur.x += (target.x - cur.x) * ease;
+    cur.y += (target.y - cur.y) * ease;
+
+    var pr = near ? 0.65 : hoverLink ? 1.75 : 1.15;
+    pupR += (pr - pupR) * 0.15;
+
+    var key = openness.toFixed(2) + '|' + cur.x.toFixed(2) + '|' + cur.y.toFixed(2) + '|' + pupR.toFixed(2);
+    if (key !== lastKey) { pre.innerHTML = renderEye(openness, cur.x, cur.y, pupR); lastKey = key; }
+    requestAnimationFrame(tick);
+  }
+  pre.innerHTML = renderEye(1, 0, 0, 1.15);
+  requestAnimationFrame(tick);
+
+  // blink counters
+  var hint = document.getElementById('eyeHint');
+  var counter = document.getElementById('blinkCounter');
+  var foot = document.getElementById('footBlinks');
+  function updateBlinkText() {
+    if (!blinks) {
+      hint.innerHTML = hint.getAttribute('data-' + lang);
+      foot.innerHTML = foot.getAttribute('data-' + lang);
+      return;
+    }
+    if (lang === 'ja') {
+      hint.textContent = 'まばたき ×' + blinks;
+      counter.textContent = 'まばたき回数：' + blinks;
+      foot.textContent = 'この目は ' + blinks + ' 回まばたきしました。';
+    } else {
+      hint.textContent = 'blinks ×' + blinks;
+      counter.textContent = 'blinks: ' + blinks;
+      foot.textContent = 'the eye has blinked ' + blinks + (blinks === 1 ? ' time.' : ' times.');
+    }
+  }
+
+  /* ================= scroll: shrink eye, active nav, reveals ================= */
+  var sidebar = document.getElementById('sidebar');
+  window.addEventListener('scroll', function () {
+    sidebar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  var navLinks = document.querySelectorAll('.sidebar-nav-link');
+  var sections = document.querySelectorAll('.section');
+  function updateActive() {
+    var line = window.innerHeight * 0.4, id = null;
+    sections.forEach(function (sec) { if (sec.getBoundingClientRect().top <= line) id = sec.id; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) id = sections[sections.length - 1].id;
+    navLinks.forEach(function (a) { a.classList.toggle('active', !!id && a.getAttribute('href') === '#' + id); });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  window.addEventListener('resize', updateActive);
+  updateActive();
+  if ('IntersectionObserver' in window) {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var sec = en.target;
+        sec.classList.add('in');
+        var h = sec.querySelector('.scr');
+        if (h && !h.dataset.revealed) { h.dataset.revealed = '1'; decrypt(h, h.getAttribute('data-' + lang), 650); }
+        sec.querySelectorAll('.bar i').forEach(function (b) { b.style.width = b.getAttribute('data-w') + '%'; });
+        revealObs.unobserve(sec);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    sections.forEach(function (s) { revealObs.observe(s); });
+
+
+  } else {
+    sections.forEach(function (s) { s.classList.add('in'); });
+    document.querySelectorAll('.bar i').forEach(function (b) { b.style.width = b.getAttribute('data-w') + '%'; });
+  }
+
+  /* ================= copy BibTeX ================= */
+  var BIB = [
+    '@inproceedings{oliverosblanco2026joint,',
+    '  title     = {Joint Transcription and Decryption of Images of Encrypted Handwritten Documents: A Comparison with the Traditional Pipeline},',
+    '  author    = {Oliveros-Blanco, Marino and Kang, Lei and Forn{\\\'e}s, Alicia and Megyesi, Be{\\\'a}ta},',
+    '  booktitle = {Proceedings of the 9th International Conference on Historical Cryptology (HistoCrypt 2026)},',
+    '  series    = {NEALT Proceedings Series},',
+    '  number    = {61},',
+    '  publisher = {Tartu University Library},',
+    '  year      = {2026},',
+    '  url       = {https://hdl.handle.net/10062/122084},',
+    '  eprint    = {2606.27700},',
+    '  archivePrefix = {arXiv}',
+    '}'
+  ].join('\n');
+  var citeBtn = document.getElementById('citeBtn');
+  citeBtn.addEventListener('click', function () {
+    function ok() {
+      citeBtn.classList.add('done');
+      citeBtn.textContent = lang === 'ja' ? 'コピーしました ✓' : 'copied ✓';
+      setTimeout(function () { citeBtn.classList.remove('done'); citeBtn.innerHTML = citeBtn.getAttribute('data-' + lang); }, 1800);
+    }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = BIB; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta); ok();
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(BIB).then(ok, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  });
+
+  /* ================= go ================= */
+  applyLang(lang, false);
+})();
+</script>
+</body>
+</html>
