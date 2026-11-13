@@ -409,9 +409,9 @@
       </div>
 
       <nav class="sidebar-nav" aria-label="Sections">
-        <a href="#projects" class="sidebar-nav-link" data-ja="プロジェクト">projects</a>
         <a href="#research" class="sidebar-nav-link" data-ja="研究">research</a>
         <a href="#experience" class="sidebar-nav-link" data-ja="経歴">experience</a>
+        <a href="#projects" class="sidebar-nav-link" data-ja="プロジェクト">projects</a>
         <a href="#about" class="sidebar-nav-link" data-ja="自己紹介">about</a>
         <a href="#contact" class="sidebar-nav-link" data-ja="連絡先">contact</a>
       </nav>
@@ -431,6 +431,79 @@
       <p class="intro" data-ja="<b>マリノ</b>です。機械に<span class=&quot;hl-1&quot;>暗号化された写本</span>を読ませ、<span class=&quot;hl-2&quot;>失われた言語とメディア</span>を追いかけ、<span class=&quot;hl-3&quot;>実際に使われる小さなツール</span>を作っています。">I'm <b>Marino</b>. I train machines to read <span class="hl-1">encrypted manuscripts</span>, go after <span class="hl-2">lost languages and lost media</span>, and build <span class="hl-3">small tools people actually use</span>.</p>
 
       <div class="sections">
+
+        <!-- RESEARCH -->
+        <section class="section reveal" id="research">
+          <div class="section-header"><span class="scr" data-ja="研究">research</span><span class="count" data-ja="論文">publication</span></div>
+          <article class="paper">
+            <div class="paper-venue">HistoCrypt 2026 · 9th International Conference on Historical Cryptology</div>
+            <h2 class="paper-title"><a href="https://hdl.handle.net/10062/122084" target="_blank" rel="noopener">Joint Transcription and Decryption of Images of Encrypted Handwritten Documents: A Comparison with the Traditional Pipeline</a></h2>
+            <div class="paper-authors"><b>Marino Oliveros-Blanco</b>, Lei Kang, Alicia Fornés, Beáta Megyesi<br><span data-ja="コンピュータビジョンセンター（UAB）・ストックホルム大学">Computer Vision Center (UAB) · Stockholm University</span></div>
+            <p class="paper-abs" data-ja="歴史的な暗号写本の解読は通常、①画像から暗号記号を文字起こしし、②それを復号する、という二段階で行われます。しかし、文字起こしの誤りはそのまま最終結果に伝播します。本論文では、写本画像から直接平文を出力する「Direct Image Decryption」を提案。コピアレ暗号を題材に、大規模な合成データ生成パイプラインを構築し、従来手法と比較しました。画像から平文への一体型モデルは、従来の文字起こしベースの手法に代わる有望な選択肢です。">Deciphering historical encrypted manuscripts usually takes two steps: transcribe the cipher symbols from the image, then decrypt them. Transcription errors propagate straight into the plaintext. We propose <i>Direct Image Decryption</i>, an end-to-end model that maps manuscript images straight to plaintext. Using the Copiale cipher as a case study, we built a synthetic data pipeline for large-scale training and compared the joint model against the traditional pipeline. Joint image-to-plaintext modelling turns out to be a promising alternative.</p>
+            <div class="paper-links">
+              <a class="sub-link" href="https://arxiv.org/abs/2606.27700" target="_blank" rel="noopener">arXiv</a>
+              <a class="sub-link" href="https://arxiv.org/pdf/2606.27700" target="_blank" rel="noopener">PDF</a>
+              <a class="sub-link" href="https://hdl.handle.net/10062/122084" target="_blank" rel="noopener" data-ja="論文集">proceedings</a>
+              <a class="sub-link" href="https://github.com/marinocom/Direct-Image-Decryption-Copiale" target="_blank" rel="noopener" data-ja="コード">code</a>
+              <button class="cite-btn" id="citeBtn" type="button" data-ja="BibTeX をコピー">copy BibTeX</button>
+            </div>
+            <div class="paper-stats">
+              <div><div class="stat-num">~100</div><div class="stat-label" data-ja="種類の暗号記号">distinct cipher glyphs</div></div>
+              <div><div class="stat-num">4–5%</div><div class="stat-label" data-ja="従来の二段階手法からの改善">improvement over the two-step pipeline</div></div>
+              <div><div class="stat-num">2 → 1</div><div class="stat-label" data-ja="文字起こしと復号を一つのモデルで">transcription and decryption in one model</div></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section class="section reveal" id="experience">
+          <div class="section-header"><span class="scr" data-ja="経歴">experience</span></div>
+          <div class="experience-list">
+            <div class="exp-item">
+              <div class="exp-role" data-ja="研究インターン：手書き暗号の解読">Research Intern: Handwritten Cipher Decryption</div>
+              <div class="exp-org"><a href="https://www.cvc.uab.es/" target="_blank" rel="noopener" data-ja="コンピュータビジョンセンター（CVC）">Computer Vision Center (CVC)</a> · <span data-ja="バルセロナ">Barcelona</span></div>
+              <div class="exp-period" data-ja="2025年4月 – 現在">Apr 2025 – present</div>
+              <div class="exp-desc" data-ja="名高い DECRYPT プロジェクトの一員として、コピアレ暗号をはじめとする歴史的な手書き暗号の直接解読を研究。従来の「文字起こし→復号」の二段階手法を 4〜5% 上回り、成果は HistoCrypt 2026 に採択されました。研究の優秀さが認められ、ロサ・センサット・タレント奨学金を受賞。">Researching direct decryption of handwritten historical ciphers, including the Copiale cipher, as part of the DECRYPT project. Beat the traditional transcribe-then-decrypt pipeline by 4–5%, with the results accepted at HistoCrypt 2026. Awarded the Rosa Sensat Talent Scholarship for research excellence.</div>
+              <div class="badges"><span class="badge">PyTorch</span><span class="badge">Computer Vision</span><span class="badge">HTR</span><span class="badge">Seq2Seq</span><span class="badge">Synthetic Data</span></div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="共同創設者">Co-Founder</div>
+              <div class="exp-org"><a href="https://uabthehack.cat" target="_blank" rel="noopener">UAB THE HACK!</a> · <span data-ja="バルセロナ">Barcelona</span></div>
+              <div class="exp-period" data-ja="2024年1月 – 2025年1月">Jan 2024 – Jan 2025</div>
+              <div class="exp-desc" data-ja="バルセロナ自治大学（UAB）初のハッカソンを共同創設。4 回開催（最新回は海賊テーマ）、延べ 500 人以上が参加。Glovo、CaixaBank Tech、Deloitte などのスポンサーを獲得し、運営と参加者体験を統括。Devpost コミュニティとウェブサイトも構築。">Co-founded the first hackathon at the Autonomous University of Barcelona. Four editions (the latest one pirate-themed) and 500+ participants in total. Secured sponsors like Glovo, CaixaBank Tech and Deloitte, ran logistics and participant experience, and built the Devpost community and website.</div>
+              <div class="badges"><span class="badge" data-ja="イベント運営">Event Organisation</span><span class="badge" data-ja="スポンサー獲得">Sponsorship</span><span class="badge" data-ja="コミュニティ">Community</span></div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="学生代表">Student Representative</div>
+              <div class="exp-org"><span data-ja="UAB 学生会 副会長 · RITSI メンバー">UAB Student Body Vice-President · RITSI member</span></div>
+              <div class="exp-period" data-ja="学部在学中">during my BSc</div>
+              <div class="exp-desc" data-ja="UAB 学生会の副会長を務め、RITSI のメンバーとして、スペイン政府に対し全国の情報系大学生を代表。BP ディベートクラブにも所属。">Vice-president of the UAB student body and RITSI member, representing Spain's tech university students before the Spanish government. Also on the BP debate club.</div>
+              <div class="badges"><span class="badge" data-ja="リーダーシップ">Leadership</span><span class="badge" data-ja="政策">Policy</span><span class="badge" data-ja="ディベート">Debate</span></div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="語学教育ボランティア">Language Education Volunteer</div>
+              <div class="exp-org"><span data-ja="京都市国際交流協会 · 左京図書館">Kyoto City International Foundation · Sakyo Ward Library</span></div>
+              <div class="exp-period" data-ja="2025年9月 – 現在">Sep 2025 – present</div>
+              <div class="exp-desc" data-ja="京都の子どもたちに、スペイン語とスペイン文学の基礎を教えています。">Teaching children in Kyoto the fundamentals of Spanish language and literature.</div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-role" data-ja="高齢者介護ボランティア">Elderly Care Volunteer</div>
+              <div class="exp-org"><span data-ja="カリタス・スペイン · サラゴサ">Cáritas Española · Zaragoza</span></div>
+              <div class="exp-period">2021 – 2022</div>
+              <div class="exp-desc" data-ja="カリタスの高齢者ホームで 1 年間、入居者の話し相手やサポートを担当。">A year of companionship and support for residents of a Cáritas home for the elderly.</div>
+            </div>
+          </div>
+
+          <div class="sub-title" data-ja="学歴">education</div>
+          <div class="edu-row">
+            <div><div class="what" data-ja="バルセロナ自治大学（UAB）">Autonomous University of Barcelona (UAB)</div><div class="detail" data-ja="人工知能 学士 · 卒業 · GPA 8.40 / 10">BSc Artificial Intelligence · graduated · GPA 8.40 / 10</div></div>
+            <div class="when">2022 – 2026</div>
+          </div>
+          <div class="edu-row">
+            <div><div class="what" data-ja="京都大学">Kyoto University</div><div class="detail" data-ja="交換留学（情報学）· データ分析、Python 機械学習、交渉学">Exchange, BSc Informatics · Data Analysis, Python Machine Learning, Negotiation</div></div>
+            <div class="when">2025 – 2026</div>
+          </div>
+        </section>
 
         <!-- PROJECTS -->
         <section class="section reveal" id="projects">
@@ -515,79 +588,6 @@
             </div>
           </div>
           <div class="more-link"><span data-ja="ほかのプロジェクト（画像キャプション、否定・不確実性検出の NLP、音楽ネットワーク分析など）は">more (image captioning, NLP negation &amp; uncertainty detection, music network analysis…) on</span> <a class="arrow-after" href="https://github.com/marinocom?tab=repositories" target="_blank" rel="noopener">github</a></div>
-        </section>
-
-        <!-- RESEARCH -->
-        <section class="section reveal" id="research">
-          <div class="section-header"><span class="scr" data-ja="研究">research</span><span class="count" data-ja="論文">publication</span></div>
-          <article class="paper">
-            <div class="paper-venue">HistoCrypt 2026 · 9th International Conference on Historical Cryptology</div>
-            <h2 class="paper-title"><a href="https://hdl.handle.net/10062/122084" target="_blank" rel="noopener">Joint Transcription and Decryption of Images of Encrypted Handwritten Documents: A Comparison with the Traditional Pipeline</a></h2>
-            <div class="paper-authors"><b>Marino Oliveros-Blanco</b>, Lei Kang, Alicia Fornés, Beáta Megyesi<br><span data-ja="コンピュータビジョンセンター（UAB）・ストックホルム大学">Computer Vision Center (UAB) · Stockholm University</span></div>
-            <p class="paper-abs" data-ja="歴史的な暗号写本の解読は通常、①画像から暗号記号を文字起こしし、②それを復号する、という二段階で行われます。しかし、文字起こしの誤りはそのまま最終結果に伝播します。本論文では、写本画像から直接平文を出力する「Direct Image Decryption」を提案。コピアレ暗号を題材に、大規模な合成データ生成パイプラインを構築し、従来手法と比較しました。画像から平文への一体型モデルは、従来の文字起こしベースの手法に代わる有望な選択肢です。">Deciphering historical encrypted manuscripts usually takes two steps: transcribe the cipher symbols from the image, then decrypt them. Transcription errors propagate straight into the plaintext. We propose <i>Direct Image Decryption</i>, an end-to-end model that maps manuscript images straight to plaintext. Using the Copiale cipher as a case study, we built a synthetic data pipeline for large-scale training and compared the joint model against the traditional pipeline. Joint image-to-plaintext modelling turns out to be a promising alternative.</p>
-            <div class="paper-links">
-              <a class="sub-link" href="https://arxiv.org/abs/2606.27700" target="_blank" rel="noopener">arXiv</a>
-              <a class="sub-link" href="https://arxiv.org/pdf/2606.27700" target="_blank" rel="noopener">PDF</a>
-              <a class="sub-link" href="https://hdl.handle.net/10062/122084" target="_blank" rel="noopener" data-ja="論文集">proceedings</a>
-              <a class="sub-link" href="https://github.com/marinocom/Direct-Image-Decryption-Copiale" target="_blank" rel="noopener" data-ja="コード">code</a>
-              <button class="cite-btn" id="citeBtn" type="button" data-ja="BibTeX をコピー">copy BibTeX</button>
-            </div>
-            <div class="paper-stats">
-              <div><div class="stat-num">~100</div><div class="stat-label" data-ja="種類の暗号記号">distinct cipher glyphs</div></div>
-              <div><div class="stat-num">4–5%</div><div class="stat-label" data-ja="従来の二段階手法からの改善">improvement over the two-step pipeline</div></div>
-              <div><div class="stat-num">2 → 1</div><div class="stat-label" data-ja="文字起こしと復号を一つのモデルで">transcription and decryption in one model</div></div>
-            </div>
-          </article>
-        </section>
-
-        <!-- EXPERIENCE -->
-        <section class="section reveal" id="experience">
-          <div class="section-header"><span class="scr" data-ja="経歴">experience</span></div>
-          <div class="experience-list">
-            <div class="exp-item">
-              <div class="exp-role" data-ja="研究インターン：手書き暗号の解読">Research Intern: Handwritten Cipher Decryption</div>
-              <div class="exp-org"><a href="https://www.cvc.uab.es/" target="_blank" rel="noopener" data-ja="コンピュータビジョンセンター（CVC）">Computer Vision Center (CVC)</a> · <span data-ja="バルセロナ">Barcelona</span></div>
-              <div class="exp-period" data-ja="2025年4月 – 現在">Apr 2025 – present</div>
-              <div class="exp-desc" data-ja="名高い DECRYPT プロジェクトの一員として、コピアレ暗号をはじめとする歴史的な手書き暗号の直接解読を研究。従来の「文字起こし→復号」の二段階手法を 4〜5% 上回り、成果は HistoCrypt 2026 に採択されました。研究の優秀さが認められ、ロサ・センサット・タレント奨学金を受賞。">Researching direct decryption of handwritten historical ciphers, including the Copiale cipher, as part of the DECRYPT project. Beat the traditional transcribe-then-decrypt pipeline by 4–5%, with the results accepted at HistoCrypt 2026. Awarded the Rosa Sensat Talent Scholarship for research excellence.</div>
-              <div class="badges"><span class="badge">PyTorch</span><span class="badge">Computer Vision</span><span class="badge">HTR</span><span class="badge">Seq2Seq</span><span class="badge">Synthetic Data</span></div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-role" data-ja="共同創設者">Co-Founder</div>
-              <div class="exp-org"><a href="https://uabthehack.cat" target="_blank" rel="noopener">UAB THE HACK!</a> · <span data-ja="バルセロナ">Barcelona</span></div>
-              <div class="exp-period" data-ja="2024年1月 – 2025年1月">Jan 2024 – Jan 2025</div>
-              <div class="exp-desc" data-ja="バルセロナ自治大学（UAB）初のハッカソンを共同創設。4 回開催（最新回は海賊テーマ）、延べ 500 人以上が参加。Glovo、CaixaBank Tech、Deloitte などのスポンサーを獲得し、運営と参加者体験を統括。Devpost コミュニティとウェブサイトも構築。">Co-founded the first hackathon at the Autonomous University of Barcelona. Four editions (the latest one pirate-themed) and 500+ participants in total. Secured sponsors like Glovo, CaixaBank Tech and Deloitte, ran logistics and participant experience, and built the Devpost community and website.</div>
-              <div class="badges"><span class="badge" data-ja="イベント運営">Event Organisation</span><span class="badge" data-ja="スポンサー獲得">Sponsorship</span><span class="badge" data-ja="コミュニティ">Community</span></div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-role" data-ja="学生代表">Student Representative</div>
-              <div class="exp-org"><span data-ja="UAB 学生会 副会長 · RITSI メンバー">UAB Student Body Vice-President · RITSI member</span></div>
-              <div class="exp-period" data-ja="学部在学中">during my BSc</div>
-              <div class="exp-desc" data-ja="UAB 学生会の副会長を務め、RITSI のメンバーとして、スペイン政府に対し全国の情報系大学生を代表。BP ディベートクラブにも所属。">Vice-president of the UAB student body and RITSI member, representing Spain's tech university students before the Spanish government. Also on the BP debate club.</div>
-              <div class="badges"><span class="badge" data-ja="リーダーシップ">Leadership</span><span class="badge" data-ja="政策">Policy</span><span class="badge" data-ja="ディベート">Debate</span></div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-role" data-ja="語学教育ボランティア">Language Education Volunteer</div>
-              <div class="exp-org"><span data-ja="京都市国際交流協会 · 左京図書館">Kyoto City International Foundation · Sakyo Ward Library</span></div>
-              <div class="exp-period" data-ja="2025年9月 – 現在">Sep 2025 – present</div>
-              <div class="exp-desc" data-ja="京都の子どもたちに、スペイン語とスペイン文学の基礎を教えています。">Teaching children in Kyoto the fundamentals of Spanish language and literature.</div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-role" data-ja="高齢者介護ボランティア">Elderly Care Volunteer</div>
-              <div class="exp-org"><span data-ja="カリタス・スペイン · サラゴサ">Cáritas Española · Zaragoza</span></div>
-              <div class="exp-period">2021 – 2022</div>
-              <div class="exp-desc" data-ja="カリタスの高齢者ホームで 1 年間、入居者の話し相手やサポートを担当。">A year of companionship and support for residents of a Cáritas home for the elderly.</div>
-            </div>
-          </div>
-
-          <div class="sub-title" data-ja="学歴">education</div>
-          <div class="edu-row">
-            <div><div class="what" data-ja="バルセロナ自治大学（UAB）">Autonomous University of Barcelona (UAB)</div><div class="detail" data-ja="人工知能 学士 · 卒業 · GPA 8.40 / 10">BSc Artificial Intelligence · graduated · GPA 8.40 / 10</div></div>
-            <div class="when">2022 – 2026</div>
-          </div>
-          <div class="edu-row">
-            <div><div class="what" data-ja="京都大学">Kyoto University</div><div class="detail" data-ja="交換留学（情報学）· データ分析、Python 機械学習、交渉学">Exchange, BSc Informatics · Data Analysis, Python Machine Learning, Negotiation</div></div>
-            <div class="when">2025 – 2026</div>
-          </div>
         </section>
 
         <!-- ABOUT -->
